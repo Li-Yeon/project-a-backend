@@ -2,6 +2,10 @@ const express = require('express')
 require('dotenv').config();
 const cors = require('cors');
 
+// Define Mongoose
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
+
 // Define Express App
 const app = express()
 
@@ -20,10 +24,18 @@ app.use((req, res, next) => {
 // Routes
 const NFTRoutes = require('./routes/NFT')
 
+// Connect to MongoDB 
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+        console.log('Mongoose is initialized');
+        // Listen for Requests
+        app.listen(process.env.PORT, () => {
+            console.log('Listening at PORT: ' + process.env.PORT)
+        })
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+
 // Route to call for BOTR NFT API
 app.use('/nft', NFTRoutes)
-
-// Listen for Requests
-app.listen(process.env.PORT, () => {
-    console.log('Listening at PORT: ' + process.env.PORT)
-})

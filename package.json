@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-express-boilerplate",
+  "name": "project-a-backend",
   "version": "1.0.0",
-  "description": "NodeJS Express Boilerplate",
+  "description": "Project A backend",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

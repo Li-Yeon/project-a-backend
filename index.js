@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 })
 
 // Routes
-const NFTRoutes = require('./routes/NFT')
+const NoteRoutes = require('./routes/NoteRoute')
 
 // Connect to MongoDB 
 mongoose.connect(process.env.MONGODB_URI)
@@ -37,5 +37,5 @@ mongoose.connect(process.env.MONGODB_URI)
         console.log(error);
     })
 
-// Route to call for BOTR NFT API
-app.use('/nft', NFTRoutes)
+// Route to call for Notes API
+app.use('/note', NoteRoutes)

@@ -12,9 +12,7 @@ const NotesSchema = new Schema({
     },
     description: {
         type: String
-    },
-    date: {
-        type: Date,
-        required: true
     }
 }, { timestamps: true })
+
+module.exports = mongoose.model('Note', NotesSchema)

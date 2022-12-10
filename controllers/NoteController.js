@@ -17,8 +17,6 @@ const GetUserNote = async (req, res) => {
 
     const note = await Note.findById(id)
 
-    console.log(note)
-
     if(!note) {
         return res.send({
             status: 404,
@@ -71,9 +69,68 @@ const CreateNewNote = async (req, res) => {
     }
 }
 
+// Delete a note
+const DeleteNote = async (req, res) => {
+
+    const { id } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.send({
+            status: 400,
+            message: 'Data is not valid'
+        })
+    }
+
+    const note = await Note.findOneAndDelete({_id: id})
+
+    if(!note) {
+        return res.send({
+            status: 404,
+            message: 'Data not found'
+        })
+    }
+
+    res.send({
+        status: 200,
+        message: 'Note successfully deleted',
+        data: note
+    })
+}
+
+// Update a note
+const UpdateNote = async (req, res) => {
+
+    const { id } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.send({
+            status: 400,
+            message: 'Data is not valid'
+        })
+    }
+
+    const note = await Note.findOneAndUpdate({_id: id}, {
+        ...req.body
+    })
+
+    if(!note) {
+        return res.send({
+            status: 404,
+            message: 'Data not found'
+        })
+    }
+
+    res.send({
+        status: 200,
+        message: 'Note updated',
+        data: note
+    })
+}
 
 module.exports = {
     GetUserNote,
     GetAllNote,
     CreateNewNote,
+    DeleteNote,
+    UpdateNote
 }

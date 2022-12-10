@@ -64,7 +64,7 @@ const CreateNewNote = async (req, res) => {
     catch (error) {
         res.send({
             status: 404,
-            message: 'error'
+            message: error
         })
     }
 }
